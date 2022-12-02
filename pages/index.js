@@ -16,6 +16,16 @@ export async function getStaticProps() {
   }
 }
 
+//SSR
+
+// export async function getServerSideProps(context) {
+//   return {
+//     props: {
+//       //コンポ年とに渡すためのprops
+//     },
+//   }
+// }
+
 export default function Home(allPostsData) {
   return (
     <Layout>
@@ -25,40 +35,18 @@ export default function Home(allPostsData) {
       <section>
         <div className={styles.grid}>
           <h2>エンジニアのブログ</h2>
-          <article>
-            <Link href="/"></Link>
-            <Link href="/">
-              <a className={utilStyle.boldText}>
-                SSGとSSRの使い分けの場面はいつかな。
-              </a>
-            </Link>
-            <br />
-            <small className={utilStyle.lightText}>February 23, 2020</small>
-          </article>
-          <article>
-            <Link href="/">
-              <img src="fvicon.ico" className={styles.thumbnailImage} />
-            </Link>
-            <Link href="/">
-              <a className={utilStyle.boldText}>
-                SSGとSSRの使い分けの場面はいつかな。
-              </a>
-            </Link>
-            <br />
-            <small className={utilStyle.lightText}>February 23, 2020</small>
-          </article>
-          <article>
-            <Link href="/">
-              <img src="fvicon.ico" className={styles.thumbnailImage} />
-            </Link>
-            <Link href="/">
-              <a className={utilStyle.boldText}>
-                SSGとSSRの使い分けの場面はいつかな。
-              </a>
-            </Link>
-            <br />
-            <small className={utilStyle.lightText}>February 23, 2020</small>
-          </article>
+          {allPostsData.map(({ id, title, date, thumbnail }) => (
+            <article key={id}>
+              <Link href={`/posts/${id}`}>
+                <img src={`${thumbnail}`} className={styles.thumbnailImage} />
+              </Link>
+              <Link href={`/posts/${id}`}>
+                <a className={utilStyle.boldText}>{title}</a>
+              </Link>
+              <br />
+              <small className={utilStyle.lightText}>{date}</small>
+            </article>
+          ))}
         </div>
       </section>
     </Layout>

@@ -5,16 +5,17 @@ import utilStyles from './styles/util.module.css'
 const name = 'Shin Code'
 export const siteTitle = 'Next.js blog'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, home }) => {
   return (
     <div className={styles.container}>
       <Head>
         <link rel="icon" href="/favicon.ico"></link>
       </Head>
       <header className={styles.Head}>
+       {home? (
         <img src="/favicon.ico" />
         <h1 className="utilStyles.heading2Xl">{name}</h1>
-      </header>
+      </header>)}
       <main>{children}</main>
     </div>
   )
